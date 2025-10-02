@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const api_url = https://github.com/glaxi27/north-marina-intrane.git/run-peche';
+    const api_url = 'https://bot-north-marina-gsly.onrender.com/run-peche';
 
     async function fetchFishingData() {
         try {
