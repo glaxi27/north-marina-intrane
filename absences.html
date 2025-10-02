@@ -3,43 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Run de Pêche - Récapitulatif</title>
+    <title>North Marina - Absences & Runs</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Récapitulatif de Pêche</h1>
+        <h1>Run de Pêche - Absences & Démissions</h1>
     </header>
 
     <main>
-        <section id="run-count-section">
+        
+        <section class="data-block">
             <h2>Nombre total de runs</h2>
-            <div class="list-container">
-                <p id="run-count-value">Chargement...</p>
-            </div>
+            <div id="total-runs" class="data-content">Chargement...</div>
         </section>
 
-        <section id="members-list">
-            <h2>Membres de la Pêche</h2>
-            <div class="list-container">
-                <table id="members-table">
-                    <thead>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Grade</th>
-                            <th>Statut</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td colspan="3">Chargement des données...</td></tr>
-                    </tbody>
-                </table>
-            </div>
+        <section class="data-block">
+            <h2>Absences Actuelles</h2>
+            <div id="absences-list" class="data-content">Impossible de charger les absences.</div>
         </section>
+
+        <section class="data-block">
+            <h2>Membres de la Pêche</h2>
+            <div id="members-list" class="data-content">Impossible de charger les données.</div>
+        </section>
+        
+        <section class="data-block">
+            <h2>Démissions Récentes</h2>
+            <div class="data-content">Impossible de charger les démissions.</div>
+        </section>
+
     </main>
 
     <footer>
-        <p>&copy; 2025 North Marina</p>
+        <p>© 2025 North Marina</p>
     </footer>
 
     <script src="script.js"></script>
