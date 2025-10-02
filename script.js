@@ -1,46 +1,63 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const api_url = 'https://bot-north-marina-gsly.onrender.com/run-peche';
+// Remplacez cette URL par l'URL publique de votre service Render
+// Exemple: 'https://bot-north-marina-gsly.onrender.com/run-peche'
+const API_URL = https://github.com/glaxi27/north-marina-intrane.git/run-peche';
 
-    async function fetchFishingData() {
-        try {
-            const response = await fetch(api_url);
-            const data = await response.json();
-            
-            // Affiche le nombre de runs
-            document.getElementById('run-count-value').textContent = data.run_count;
-
-            displayMembers(data.members, data.absences);
-        } catch (error) {
-            console.error('Erreur lors de la récupération des données de l\'API:', error);
-            document.getElementById('members-table').innerHTML = '<tr><td colspan="3">Impossible de charger les données.</td></tr>';
+async function fetchData() {
+    try {
+        const response = await fetch(API_URL);
+        
+        // Vérifie si la réponse est OK (statut 200)
+        if (!response.ok) {
+            throw new Error(`Erreur HTTP: ${response.status}`);
         }
+        
+        const data = await response.json();
+        return data;
+
+    } catch (error) {
+        console.error("Erreur lors du chargement des données de l'API :", error);
+        return null;
     }
+}
 
-    function displayMembers(members, absences) {
-        const tableBody = document.getElementById('members-table').querySelector('tbody');
-        tableBody.innerHTML = ''; // Vide le contenu existant
+function updateIntranet(data) {
+    const runCountElement = document.getElementById('run-count');
+    const absencesListElement = document.getElementById('absences-list');
 
-        if (members.length === 0) {
-            tableBody.innerHTML = '<tr><td colspan="3">Aucun membre enregistré.</td></tr>';
-            return;
-        }
-
-        const absentMembers = absences.map(absent => absent.pseudo.toLowerCase());
-
-        members.forEach(member => {
-            const isAbsent = absentMembers.includes(member.pseudo.toLowerCase());
-            const statut = isAbsent ? 'Absent' : 'Présent';
-            const statutColor = isAbsent ? 'red' : 'green';
-
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${member.pseudo}</td>
-                <td>${member.grade}</td>
-                <td style="color:${statutColor};"><strong>${statut}</strong></td>
+    // --- Mise à jour du nombre de runs ---
+    if (runCountElement) {
+        if (data && typeof data.run_count === 'number') {
+            runCountElement.innerHTML = `
+                <div class="metric-value">${data.run_count}</div>
+                <div class="metric-label">Runs enregistrés</div>
             `;
-            tableBody.appendChild(row);
-        });
+        } else {
+            runCountElement.textContent = "Donnée non disponible.";
+        }
     }
 
-    fetchFishingData();
-});
+    // --- Mise à jour des absences ---
+    if (absencesListElement) {
+        if (data && Array.isArray(data.absences) && data.absences.length > 0) {
+            absencesListElement.innerHTML = data.absences.map(absence => `
+                <div class="list-item">
+                    <span class="item-name">${absence.pseudo}</span>
+                    <span class="item-dates">Du ${absence.date_debut} au ${absence.date_fin}</span>
+                    <span class="item-reason">Raison: ${absence.raison}</span>
+                </div>
+            `).join('');
+        } else if (data) {
+            absencesListElement.textContent = "Aucune absence enregistrée actuellement.";
+        } else {
+            absencesListElement.textContent = "Impossible de charger les absences.";
+        }
+    }
+}
+
+async function init() {
+    const data = await fetchData();
+    updateIntranet(data);
+}
+
+// Initialise le chargement des données au démarrage de la page
+init();

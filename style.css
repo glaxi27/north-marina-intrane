@@ -1,72 +1,108 @@
 body {
-    background-color: #36393f; /* Arrière-plan sombre de Discord */
-    color: #dcddde; /* Couleur du texte clair */
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Arial, sans-serif;
+    background-color: #2c3e50; /* Couleur sombre du corps */
+    color: #ecf0f1; /* Texte clair */
     margin: 0;
     padding: 0;
-    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 header {
-    background-color: #2f3136; /* Barre d'en-tête légèrement plus claire */
+    background-color: #34495e;
+    color: white;
     padding: 20px 0;
+    width: 100%;
     text-align: center;
-    border-bottom: 1px solid #202225;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-    color: #7289da; /* Bleu Discord pour le titre principal */
-    font-size: 2em;
+header h1 {
     margin: 0;
 }
 
 main {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 0 20px;
+    padding: 20px;
+    width: 90%;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
 }
 
-/* Style des blocs de données (sections) */
-.data-block {
-    background-color: #2f3136; /* Le bloc de données lui-même */
-    padding: 15px 20px;
-    margin-bottom: 25px;
-    border-radius: 8px; /* Bords arrondis */
-    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+.data-card {
+    background-color: #34495e;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-h2 {
-    color: #7289da; /* Bleu Discord pour les titres de section (Absences Actuelles, etc.) */
-    font-size: 1.2em;
-    border-bottom: 2px solid #4f545c;
-    padding-bottom: 5px;
+.data-card h2 {
+    color: #1abc9c; /* Titre vert */
+    border-bottom: 2px solid #1abc9c;
+    padding-bottom: 10px;
     margin-top: 0;
     margin-bottom: 15px;
+    font-size: 1.2em;
 }
 
-/* Style du contenu des données (Là où les résultats apparaissent) */
-.data-content {
-    font-size: 1.1em;
-    min-height: 50px; /* Pour que la section ne s'affaisse pas lors du chargement */
-    padding: 10px 0;
-}
-
-#absences-list ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-#absences-list li {
-    background-color: #4f545c;
-    padding: 10px;
-    margin-bottom: 8px;
-    border-radius: 4px;
-}
-
-/* Style du pied de page */
-footer {
+.content {
+    min-height: 50px; /* Assure un minimum de hauteur */
     text-align: center;
-    padding: 20px 0;
-    color: #4f545c;
+}
+
+.list-content {
+    text-align: left;
+}
+
+/* Style spécifique pour le nombre de runs */
+.metric-value {
+    font-size: 3em;
+    font-weight: bold;
+    color: #3498db; /* Valeur bleue */
+}
+
+.metric-label {
+    font-size: 0.9em;
+    color: #bdc3c7;
+}
+
+/* Style pour les listes (absences, etc.) */
+.list-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #4a627a;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.list-item:last-child {
+    border-bottom: none;
+}
+
+.item-name {
+    font-weight: bold;
+    color: #ecf0f1;
+}
+
+.item-dates {
+    font-size: 0.9em;
+    color: #f1c40f; /* Dates jaunes */
+}
+
+.item-reason {
+    font-size: 0.8em;
+    font-style: italic;
+    color: #bdc3c7;
+}
+
+footer {
+    margin-top: 40px;
+    padding: 15px 0;
+    width: 100%;
+    text-align: center;
+    color: #7f8c8d;
     font-size: 0.8em;
 }
